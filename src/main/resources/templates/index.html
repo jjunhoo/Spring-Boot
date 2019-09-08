@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<meta>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>Spring Boot Journal</title>
+    <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.glyphicons.css"></link>
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css"></link>
+</head>
+<body>
+    <div class="container">
+        <h1>Spring Boot Journal</h1>
+
+        <ul class="timeline">
+            <div th:each="entry,status : ${journal}">
+                <li th:attr="class=${status.odd}?'timeline-inverted':''">
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4><span th:text="${entry.title}">제목</span></h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"><span th:text="${entry.createdAsShort}">에 작성.</span></i></small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p><span th:text="${entry.summary}">요약</span></p>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</body>
+</html>
