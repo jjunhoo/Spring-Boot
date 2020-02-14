@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -69,6 +71,10 @@ public class SpringBootJournalApplication {
     @Autowired
     MyAppProperties props;
 
+    // RedisTemplate
+    @Autowired
+    StringRedisTemplate redisTemplate;
+
     @Component
     @ConfigurationProperties(prefix = "myapp")
         public static class MyAppProperties {
@@ -105,6 +111,19 @@ public class SpringBootJournalApplication {
             repo.save(new Journal("Spring Boot", "Spring Boot", "01/01/2020"));
             repo.save(new Journal("Spring Framework", "Spring Framework", "02/14/2020"));
             log.info("Start JPA Data End");
+
+            // TODO
+            // Spring Boot Init - Redis
+            // 자동으로 현재 구동중인 Redis Server DB에 데이터 저장
+            ValueOperations<String, String> values = redisTemplate.opsForValue();
+            values.set("name", "KJH");
+            values.set("framework", "Spring Boot");
+
+            log.info("[Redis Connection Factory Info] : " + redisTemplate.getConnectionFactory());
+            log.info("[Redis Connection Factory Connection Info] : " + redisTemplate.getConnectionFactory().getConnection());
+            log.info("[Redis Connection Factory Connection ClientName Info] : " + redisTemplate.getConnectionFactory().getConnection().getClientName());
+            log.info("[Redis Connection Factory Connection ServerCommands Info] : " + redisTemplate.getConnectionFactory().getConnection().serverCommands());
+
         };
     }
 
