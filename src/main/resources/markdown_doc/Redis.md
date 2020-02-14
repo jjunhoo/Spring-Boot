@@ -11,4 +11,4 @@
 3-2. Redis GUI > Redliy 설치
 - https://www.redily.app/
 
-<img src="/image/Redily_실행화면.png" width="90%"></img>
+<img src="./image/Redily_실행화면.png" width="90%"></img>
