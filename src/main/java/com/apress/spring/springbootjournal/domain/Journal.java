@@ -1,6 +1,5 @@
 package com.apress.spring.springbootjournal.domain;
 
-import javax.management.ValueExp;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,13 +57,13 @@ public class Journal {
     // 레코드를 보기 편하게 출력하기 위한 toString 재정의
     public String toString() {
         StringBuilder value = new StringBuilder("JournalEntity(");
-        value.append("id: ");
+        value.append("id : ");
         value.append(id);
-        value.append(",제목: ");
+        value.append(",Title : ");
         value.append(title);
-        value.append(",요약: ");
+        value.append(",Summary : ");
         value.append(summary);
-        value.append(",일자: ");
+        value.append(",Date : ");
         value.append(getCreatedAsShort());
         value.append(")");
         return value.toString();

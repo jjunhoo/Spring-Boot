@@ -69,7 +69,6 @@ public class SpringBootJournalApplication {
     @Autowired
     MyAppProperties props;
 
-    //
     @Component
     @ConfigurationProperties(prefix = "myapp")
         public static class MyAppProperties {
@@ -101,8 +100,11 @@ public class SpringBootJournalApplication {
     @Bean
     InitializingBean saveData(JournalRepository repo) {
         return () -> {
-            repo.save(new Journal("스프링 부트 입문", "오늘부터 스프링부트 공부하기 시작", "01/01/2016"));
-            repo.save(new Journal("스프링 부트 초보", "어제부터 스프링부트 공부하기 시작", "02/05/2017"));
+            // Spring Boot Init - JPA Data Save
+            log.info("Start JPA Data Save");
+            repo.save(new Journal("Spring Boot", "Spring Boot", "01/01/2020"));
+            repo.save(new Journal("Spring Framework", "Spring Framework", "02/14/2020"));
+            log.info("Start JPA Data End");
         };
     }
 
@@ -130,9 +132,9 @@ public class SpringBootJournalApplication {
     @Bean
     CommandLineRunner values() {
         return args -> {
-            log.info(" > 서버 IP : " + serverIp);
-            log.info(" > 어플리케이션명 : " + props.getName());
-            log.info(" > 어플리케이션 정보 : " + props.getDescription());
+            log.info(" > Server IP : " + serverIp);
+            log.info(" > Application Name : " + props.getName());
+            log.info(" > Application Info : " + props.getDescription());
         };
     }
 }
